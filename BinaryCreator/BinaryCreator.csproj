@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>bincrtr</AssemblyName>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PackageId>$(AssemblyName).dll</PackageId>
+    <Version>$(VersionPrefix)</Version>
+    <Title>Binary Creator</Title>
+    <Authors>Alec James McKeever</Authors>
+    <Company>McKeever Studios</Company>
+    <Product>$(AssemblyName).dll</Product>
+    <Description>A small c# utility library for creating structured binary files. </Description>
+    <Copyright>GNU General Public License</Copyright>
+    <PackageIcon></PackageIcon>
+    <PackageReadmeFile>ReadMe.md</PackageReadmeFile>
+    <FileVersion>1.0.0.0</FileVersion>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\ReadMe.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

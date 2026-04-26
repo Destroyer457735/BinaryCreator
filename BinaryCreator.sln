@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37012.4
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinaryCreator", "BinaryCreator\BinaryCreator.csproj", "{2C598A58-D4F3-444C-811F-A2F2BC6FBC12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinaryCreatorDebugger", "BinaryCreatorDebugger\BinaryCreatorDebugger.csproj", "{F78012E1-D6D7-4E11-AD5B-25B527004B15}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2C598A58-D4F3-444C-811F-A2F2BC6FBC12}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{2C598A58-D4F3-444C-811F-A2F2BC6FBC12}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{2C598A58-D4F3-444C-811F-A2F2BC6FBC12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C598A58-D4F3-444C-811F-A2F2BC6FBC12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F78012E1-D6D7-4E11-AD5B-25B527004B15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F78012E1-D6D7-4E11-AD5B-25B527004B15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F78012E1-D6D7-4E11-AD5B-25B527004B15}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E5DDAA5B-3672-4DAB-B79A-57B3DB601A65}
+	EndGlobalSection
+EndGlobal

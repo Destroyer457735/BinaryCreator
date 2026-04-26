@@ -1,0 +1,1 @@
+A small c# utility library for creating structured binary files.
