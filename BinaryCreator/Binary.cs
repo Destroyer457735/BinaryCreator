@@ -178,9 +178,9 @@ namespace BinaryCreator
                 int sectionAmount = Binary.ReadIntFromSpan(sectionAmountSpan.ToArray(), endian);
 
                 sectionDefinitions = new BinSectionDefinition[sectionAmountSpan.Length];
-                sectionData = new byte[sectionAmountSpan.Length][];
+                sectionData = new byte[ReadUIntFromByteArray(sectionAmountSpan.ToArray(), endian)][];
 
-                for (int i = 0; i<sectionAmountSpan.Length; i++)
+                for (int i = 0; i<ReadUIntFromByteArray(sectionAmountSpan.ToArray(), endian); i++)
                 {
                     sectionDefinitions[i].SetID(GetChunkDChandle(ref DC, ref data, 8).ToArray());
                     sectionDefinitions[i].SetRVA(ReadUlongFromSpan(GetChunkDChandle(ref DC, ref data, 8).ToArray(), endian));
@@ -532,49 +532,49 @@ namespace BinaryCreator
         #region Readers
         public static ushort ReadUshortFromByteArray(byte[] bytes, Endian endianess, int startIndex = 0)
         {
-            Span<byte> copied = bytes.AsSpan(startIndex,startIndex + 1);
+            Span<byte> copied = bytes.AsSpan(startIndex,startIndex + 2);
             if (endianess.IsBigEndian()) { copied.Reverse(); }
             return BitConverter.ToUInt16(copied);
         }
         public static short ReadShortFromByteArray(byte[] bytes, Endian endianess, int startIndex = 0)
         {
-            Span<byte> copied = bytes.AsSpan(startIndex, startIndex + 1);
+            Span<byte> copied = bytes.AsSpan(startIndex, startIndex + 2);
             if (endianess.IsBigEndian()) { copied.Reverse(); }
             return BitConverter.ToInt16(copied);
         }
         public static uint ReadUIntFromByteArray(byte[] bytes, Endian endianess, int startIndex = 0)
         {
-            Span<byte> copied = bytes.AsSpan(startIndex, startIndex + 3);
+            Span<byte> copied = bytes.AsSpan(startIndex, startIndex + 4);
             if (endianess.IsBigEndian()) { copied.Reverse(); }
             return BitConverter.ToUInt32(copied);
         }
         public static int ReadIntFromByteArray(byte[] bytes, Endian endianess, int startIndex = 0)
         {
-            Span<byte> copied = bytes.AsSpan(startIndex, startIndex + 3);
+            Span<byte> copied = bytes.AsSpan(startIndex, startIndex + 4);
             if (endianess.IsBigEndian()) { copied.Reverse(); }
             return BitConverter.ToInt32(copied);
         }
         public static ulong ReadUlongFromByteArray(byte[] bytes, Endian endianess, int startIndex = 0)
         {
-            Span<byte> copied = bytes.AsSpan(startIndex, startIndex + 7);
+            Span<byte> copied = bytes.AsSpan(startIndex, startIndex + 8);
             if (endianess.IsBigEndian()) { copied.Reverse(); }
             return BitConverter.ToUInt64(copied);
         }
         public static long ReadLongFromByteArray(byte[] bytes, Endian endianess, int startIndex = 0)
         {
-            Span<byte> copied = bytes.AsSpan(startIndex, startIndex + 7);
+            Span<byte> copied = bytes.AsSpan(startIndex, startIndex + 8);
             if (endianess.IsBigEndian()) { copied.Reverse(); }
             return BitConverter.ToInt64(copied);
         }
         public static float ReadSingleFromByteArray(byte[] bytes, Endian endianess, int startIndex = 0)
         {
-            Span<byte> copied = bytes.AsSpan(startIndex, startIndex + 3);
+            Span<byte> copied = bytes.AsSpan(startIndex, startIndex + 4);
             if (endianess.IsBigEndian()) { copied.Reverse(); }
             return BitConverter.ToSingle(copied);
         }
         public static double ReadDoubleFromByteArray(byte[] bytes, Endian endianess, int startIndex = 0)
         {
-            Span<byte> copied = bytes.AsSpan(startIndex, startIndex + 7);
+            Span<byte> copied = bytes.AsSpan(startIndex, startIndex + 8);
             if (endianess.IsBigEndian()) { copied.Reverse(); }
             return BitConverter.ToDouble(copied);
         }

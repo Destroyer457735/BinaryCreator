@@ -91,13 +91,13 @@ bin.AddSection(
 );
 bin.SetRVAinSection(floatSection, ulong.MaxValue);
 
-bin.AddSection(
-    byteSection,
-    byteData.ToArray(),
-    true
-);
+//bin.AddSection(
+//    byteSection,
+//    byteData.ToArray(),
+//    true
+//);
 
-bin.SetRVAinSection(byteSection, ulong.MaxValue);
+//bin.SetRVAinSection(byteSection, ulong.MaxValue);
 
 bin.RefreshRVAs();
 bin.RefreshSizes();
