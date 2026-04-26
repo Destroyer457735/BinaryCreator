@@ -7,7 +7,7 @@
     <AssemblyName>bincrtr</AssemblyName>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <PackageId>$(AssemblyName).dll</PackageId>
-    <Version>$(VersionPrefix)</Version>
+    <Version>1.0.1</Version>
     <Title>Binary Creator</Title>
     <Authors>Alec James McKeever</Authors>
     <Company>McKeever Studios</Company>
@@ -16,9 +16,12 @@
     <Copyright>GNU General Public License</Copyright>
     <PackageIcon></PackageIcon>
     <PackageReadmeFile>ReadMe.md</PackageReadmeFile>
-    <FileVersion>1.0.0.0</FileVersion>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.1.0.0</FileVersion>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageReleaseNotes>Fixed reader not reading section amount properly.
+
+Fixed byte to value converters creating spans with incorrect length. (1 less than intended value)</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
