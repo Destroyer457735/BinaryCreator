@@ -3,7 +3,11 @@ Binary Creator - Binary Utility Library
 Copyright (C) 2026  Alec James McKeever
 //*/
 using System;
+#if NET48
+
+#else
 using System.Buffers.Binary;
+#endif
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -20,7 +24,7 @@ namespace BinaryCreator
         public static readonly int headerAndVersionSize = 20;
         public static readonly Endian littleEndian = new Endian(false, true);
         public static readonly Endian bigEndian = new Endian(true, false);
-        public static readonly BinVersion libraryVersion = new(1,0,0,0);
+        public static readonly BinVersion libraryVersion = new BinVersion(1,0,0,0);
 
         [StructLayout(LayoutKind.Sequential)]
         public struct BinDataSet
@@ -101,7 +105,7 @@ namespace BinaryCreator
                         stream.Write(section.id);
                         stream.Write(ConvertValueToBytes(section.rva, endianess));
                         stream.Write(ConvertValueToBytes(section.size, endianess));
-                        stream.Write(ConvertBoolArrayToByteArray([section.isReadOnly]));
+                        stream.Write(ConvertBoolArrayToByteArray(new bool[] { section.isReadOnly }));
                         stream.Write(new byte[7]);
                     }
                     foreach (byte[] data in sectionData)
@@ -122,7 +126,7 @@ namespace BinaryCreator
                     finalized.AddRange(section.id);
                     finalized.AddRange(ConvertValueToBytes(section.rva, endianess));
                     finalized.AddRange(ConvertValueToBytes(section.size, endianess));
-                    finalized.AddRange(ConvertBoolArrayToByteArray([section.isReadOnly]));
+                    finalized.AddRange(ConvertBoolArrayToByteArray(new bool[] { section.isReadOnly }));
                     finalized.AddRange(new byte[7]);
                 }
                 foreach (byte[] data in sectionData)
@@ -363,7 +367,7 @@ namespace BinaryCreator
                         BinaryPrimitives.WriteInt64LittleEndian(span, (long)value);
                     }
                     break;
-
+#if NET8_0_OR_GREATER
                 case UInt128 s:
                     span = new byte[16];
                     if (endianness.isBigEndian)
@@ -387,8 +391,9 @@ namespace BinaryCreator
                         BinaryPrimitives.WriteInt128LittleEndian(span, (Int128)value);
                     }
                     break;
-
+#endif
                 case float s:
+#if NET8_0_OR_GREATER
                     span = new byte[4];
                     if (endianness.isBigEndian)
                     {
@@ -399,8 +404,21 @@ namespace BinaryCreator
                         BinaryPrimitives.WriteSingleLittleEndian(span, (float)value);
                     }
                     break;
-
+#else
+                    span = BitConverter.GetBytes((float)value);
+                    if (endianness.isBigEndian)
+                    {
+                        if(BitConverter.IsLittleEndian)
+                            span.Reverse();
+                    } else
+                    {
+                        if(!BitConverter.IsLittleEndian)
+                            span.Reverse();
+                    }
+                    break;
+#endif
                 case double s:
+#if NET8_0_OR_GREATER
                     span = new byte[8];
                     if (endianness.isBigEndian)
                     {
@@ -411,6 +429,20 @@ namespace BinaryCreator
                         BinaryPrimitives.WriteDoubleLittleEndian(span, (double)value);
                     }
                     break;
+#else
+                    span = BitConverter.GetBytes((double)value);
+                    if (endianness.isBigEndian)
+                    {
+                        if (BitConverter.IsLittleEndian)
+                            span.Reverse();
+                    }
+                    else
+                    {
+                        if (!BitConverter.IsLittleEndian)
+                            span.Reverse();
+                    }
+                    break;
+#endif
             }
             return span.ToArray();
         }
@@ -514,11 +546,15 @@ namespace BinaryCreator
             }
             return finalized;
         }
-        #endregion
+#endregion
         #region Random
         public static float RandomFloatInRange(float min, float max, Random random)
         {
+#if NETSTANDARD2_1
+            var x = (float)random.NextDouble();
+#else
             var x = random.NextSingle();
+#endif
 
             return x * max + (1 - x) * min;
         }
@@ -528,7 +564,7 @@ namespace BinaryCreator
 
             return x * max + (1 - x) * min;
         }
-        #endregion
+#endregion
         #region Readers
         public static ushort ReadUshortFromByteArray(byte[] bytes, Endian endianess, int startIndex = 0)
         {

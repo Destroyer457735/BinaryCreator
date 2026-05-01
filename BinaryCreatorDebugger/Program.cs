@@ -111,7 +111,7 @@ bin.WriteToDisk(System.AppDomain.CurrentDomain.BaseDirectory + @"\BinaryData.bin
 byte[] finalized;
 bin.WriteToByteArray(out finalized, Binary.littleEndian);
 Console.WriteLine(BitConverter.ToString(finalized));
-Console.WriteLine(Binary.ReadShortFromByteArray(new byte[] { 0x10, 0xFF, 0x01 }, Binary.littleEndian, 1));
+Console.WriteLine(Binary.ReadShortFromByteArray(new byte[] { 0x10, 0xFF, 0x01 }, Binary.littleEndian, 0));
 
 Binary.BinDataSet readSet = new Binary.BinDataSet();
 readSet.ReadFromByteArray(finalized, new Binary.BinVersion(),binHeader,Binary.littleEndian);
