@@ -7,7 +7,7 @@
     <AssemblyName>bincrtr</AssemblyName>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <PackageId>$(AssemblyName).dll</PackageId>
-    <Version>1.0.1</Version>
+    <Version>1.1.0</Version>
     <Title>Binary Creator</Title>
     <Authors>Alec James McKeever</Authors>
     <Company>McKeever Studios</Company>
@@ -19,9 +19,7 @@
     <FileVersion>1.1.0.0</FileVersion>
     <AssemblyVersion>1.1.0.0</AssemblyVersion>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageReleaseNotes>Fixed reader not reading section amount properly.
-
-Fixed byte to value converters creating spans with incorrect length. (1 less than intended value)</PackageReleaseNotes>
+    <PackageReleaseNotes>Added .net 2.1 compatibility for unity.</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
 	  <ImplicitUsings>disable</ImplicitUsings>
   </PropertyGroup>
