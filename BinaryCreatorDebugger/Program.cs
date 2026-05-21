@@ -118,13 +118,15 @@ readSet.ReadFromByteArray(finalized, new Binary.BinVersion(),binHeader,Binary.li
 Console.WriteLine(BitConverter.ToString(readSet.GetDataInSection(dataSection)));
 
 Console.WriteLine("================ Testing Smart Converters ================");
+int incrementer = 0;
 byte[] SmartConvertByteArray = new byte[16] { 0x00, 0x01, 0x02, 0x03, 0x04, 0x00, 0x01, 0x02, 0x03, 0x04, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05 };
 Console.WriteLine("Converting Byte Array to Smart Byte Array");
 byte[] SmartConvertByteArrayConverted = Binary.SmartConvertByteArrayToBytes(SmartConvertByteArray, Binary.littleEndian);
 Console.WriteLine($"Result: {BitConverter.ToString(SmartConvertByteArrayConverted)}");
 Console.WriteLine("Converting Back to Normal Byte Array");
-byte[] ReconvertedSmartByteArray = Binary.SmartConvertBytesToByteArray(SmartConvertByteArrayConverted, Binary.littleEndian);
+byte[] ReconvertedSmartByteArray = Binary.SmartConvertBytesToByteArray(SmartConvertByteArrayConverted, Binary.littleEndian, ref incrementer);
 Console.WriteLine($"Result: {BitConverter.ToString(ReconvertedSmartByteArray)}");
 if (SmartConvertByteArray.SequenceEqual(ReconvertedSmartByteArray))
     Console.WriteLine("Results Match!");
 else Console.WriteLine("Results Don't Match!");
+Console.WriteLine($"Incrementer: {incrementer}");

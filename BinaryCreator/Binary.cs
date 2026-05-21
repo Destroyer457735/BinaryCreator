@@ -447,6 +447,8 @@ namespace BinaryCreator
             return span.ToArray();
         }
 
+
+
         public static byte[] SmartConvertByteArrayToBytes(byte[] data, Endian endianness)
         {
             byte[] startIndex = ConvertValueToBytes(data.Length, endianness);
@@ -457,12 +459,22 @@ namespace BinaryCreator
             byte[] startIndex = ConvertValueToBytes(data.Length, endianness);
             return startIndex.Concat(data.ToArray()).ToArray();
         }
+
         public static byte[] SmartConvertBytesToByteArray(byte[] data, Endian endianness, int index = 0)
         {
             int arrayLength = ReadIntFromByteArray(data, endianness, index);
-            Span<byte> finalized = new Span<byte>(data, index+4, arrayLength);
+            Span<byte> finalized = new Span<byte>(data, index + 4, arrayLength);
             return finalized.ToArray();
         }
+        public static byte[] SmartConvertBytesToByteArray(byte[] data, Endian endianness, ref int incrementer, int index = 0)
+        {
+            int arrayLength = ReadIntFromByteArray(data, endianness, index);
+            incrementer += 4 + arrayLength;
+            Span<byte> finalized = new Span<byte>(data, index + 4, arrayLength);
+            return finalized.ToArray();
+        }
+
+
         public static byte CreateByte(bool[] bits)
         {
             if (bits.Length > 8)
