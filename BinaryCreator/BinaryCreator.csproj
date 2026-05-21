@@ -7,7 +7,7 @@
     <AssemblyName>bincrtr</AssemblyName>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <PackageId>$(AssemblyName).dll</PackageId>
-    <Version>1.1.0</Version>
+    <Version>1.2.0</Version>
     <Title>Binary Creator</Title>
     <Authors>Alec James McKeever</Authors>
     <Company>McKeever Studios</Company>
@@ -16,12 +16,14 @@
     <Copyright>GNU General Public License</Copyright>
     <PackageIcon></PackageIcon>
     <PackageReadmeFile>ReadMe.md</PackageReadmeFile>
-    <FileVersion>1.1.0.0</FileVersion>
-    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <FileVersion>1.2.0.0</FileVersion>
+    <AssemblyVersion>1.2.0.0</AssemblyVersion>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageReleaseNotes>Added .net 2.1 compatibility for unity.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added smart converter for byte array.
+Added overload method on readers for incrementing a counter.</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
 	  <ImplicitUsings>disable</ImplicitUsings>
+	  <NeutralLanguage>en-US</NeutralLanguage>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0|AnyCPU'">
