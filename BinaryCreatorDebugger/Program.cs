@@ -116,3 +116,15 @@ Console.WriteLine(Binary.ReadShortFromByteArray(new byte[] { 0x10, 0xFF, 0x01 },
 Binary.BinDataSet readSet = new Binary.BinDataSet();
 readSet.ReadFromByteArray(finalized, new Binary.BinVersion(),binHeader,Binary.littleEndian);
 Console.WriteLine(BitConverter.ToString(readSet.GetDataInSection(dataSection)));
+
+Console.WriteLine("================ Testing Smart Converters ================");
+byte[] SmartConvertByteArray = new byte[16] { 0x00, 0x01, 0x02, 0x03, 0x04, 0x00, 0x01, 0x02, 0x03, 0x04, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05 };
+Console.WriteLine("Converting Byte Array to Smart Byte Array");
+byte[] SmartConvertByteArrayConverted = Binary.SmartConvertByteArrayToBytes(SmartConvertByteArray, Binary.littleEndian);
+Console.WriteLine($"Result: {BitConverter.ToString(SmartConvertByteArrayConverted)}");
+Console.WriteLine("Converting Back to Normal Byte Array");
+byte[] ReconvertedSmartByteArray = Binary.SmartConvertBytesToByteArray(SmartConvertByteArrayConverted, Binary.littleEndian);
+Console.WriteLine($"Result: {BitConverter.ToString(ReconvertedSmartByteArray)}");
+if (SmartConvertByteArray.SequenceEqual(ReconvertedSmartByteArray))
+    Console.WriteLine("Results Match!");
+else Console.WriteLine("Results Don't Match!");
