@@ -282,13 +282,28 @@ namespace BinaryCreator
             public void SetBigEndian() { isBigEndian = true; isLittleEndian = false; }
             public void SetLittleEndian() { isLittleEndian = true; isBigEndian = false; }
         }
-
+        /// <summary>
+        /// Get a chunck of data from a byte array while incrementing a data counter.
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="data"></param>
+        /// <param name="amount"></param>
+        /// <returns></returns>
         public static Span<byte> GetChunkDChandle(ref int dc, ref byte[] data, int amount)
         {
             Span<byte> finalized;
             finalized = data.AsSpan(dc, amount);
             dc += amount;
             return finalized;
+        }
+
+        public static BinVersion ExtractCustomVersionFromBytes(byte[] data, Endian endianness)
+        {
+            int dc = 0;
+            GetChunkDChandle(ref dc, ref data, 12);
+            BinVersion ver = new BinVersion();
+            ver.ReadFromBytes(GetChunkDChandle(ref dc, ref data, 4));
+            return ver;
         }
 
         #region Converters
