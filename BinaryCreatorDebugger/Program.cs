@@ -130,3 +130,19 @@ if (SmartConvertByteArray.SequenceEqual(ReconvertedSmartByteArray))
     Console.WriteLine("Results Match!");
 else Console.WriteLine("Results Don't Match!");
 Console.WriteLine($"Incrementer: {incrementer}");
+
+Console.WriteLine("================ Testing Bool Array to Byte Array ================");
+bool[] boolArray = new bool[random.Next(100)];
+for(int i = 0; i < boolArray.Length; i++)
+{
+    boolArray[i] = random.Next(2) == 0;
+}
+Console.WriteLine($"Converting bools to byte array: {string.Join(",",boolArray)}");
+finalized = Binary.ConvertBoolArrayToByteArray(boolArray);
+Console.WriteLine($"Result: {BitConverter.ToString(finalized)}");
+Console.WriteLine($"Converting back to byte array...");
+bool[] convertedBools = Binary.ConvertByteArrayToBoolArray(finalized);
+Console.WriteLine($"Result: {string.Join(",", convertedBools)}");
+if (convertedBools.Zip(boolArray, (a, b) => a == b).All(x => x))
+    Console.WriteLine($"Results Match!");
+else Console.WriteLine($"Results Don't Match!");

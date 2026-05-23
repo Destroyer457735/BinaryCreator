@@ -550,7 +550,7 @@ namespace BinaryCreator
         {
             byte[] finalized = new byte[(int)Math.Ceiling(source.Length/8f)];
             bool[] currentBools = new bool[8];
-            for(int i = 0; i < source.Length / 8; i++)
+            for(int i = 0; i < finalized.Length; i++)
             {
                 for(int k = 0; k < 8; k++)
                 {
