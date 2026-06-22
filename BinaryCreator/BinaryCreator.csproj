@@ -7,7 +7,7 @@
     <AssemblyName>bincrtr</AssemblyName>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <PackageId>$(AssemblyName).dll</PackageId>
-    <Version>1.3.2</Version>
+    <Version>1.3.3</Version>
     <Title>Binary Creator</Title>
     <Authors>Alec James McKeever</Authors>
     <Company>McKeever Studios</Company>
@@ -19,7 +19,7 @@
     <FileVersion>1.3.2.0</FileVersion>
     <AssemblyVersion>1.3.2.0</AssemblyVersion>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageReleaseNotes>Fixed byte converters taking the length of the input index plus the length of the required bytes, resulting in many out of range exceptions.</PackageReleaseNotes>
+    <PackageReleaseNotes>Fixed ReadFromByteArray method erroring with datasets inlcuding more than 4 sections.</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
 	  <ImplicitUsings>disable</ImplicitUsings>
 	  <NeutralLanguage>en-US</NeutralLanguage>

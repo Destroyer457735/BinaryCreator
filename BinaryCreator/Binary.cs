@@ -179,12 +179,12 @@ namespace BinaryCreator
                 }
 
                 Span<byte> sectionAmountSpan = GetChunkDChandle(ref DC, ref data, 4);
-                int sectionAmount = Binary.ReadIntFromSpan(sectionAmountSpan.ToArray(), endian);
+                uint sectionAmount = Binary.ReadUIntFromSpan(sectionAmountSpan.ToArray(), endian);
 
                 sectionDefinitions = new BinSectionDefinition[sectionAmountSpan.Length];
                 sectionData = new byte[ReadUIntFromByteArray(sectionAmountSpan.ToArray(), endian)][];
 
-                for (int i = 0; i<ReadUIntFromByteArray(sectionAmountSpan.ToArray(), endian); i++)
+                for (int i = 0; i<sectionAmount; i++)
                 {
                     sectionDefinitions[i].SetID(GetChunkDChandle(ref DC, ref data, 8).ToArray());
                     sectionDefinitions[i].SetRVA(ReadUlongFromSpan(GetChunkDChandle(ref DC, ref data, 8).ToArray(), endian));
