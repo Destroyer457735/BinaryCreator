@@ -181,7 +181,7 @@ namespace BinaryCreator
                 Span<byte> sectionAmountSpan = GetChunkDChandle(ref DC, ref data, 4);
                 uint sectionAmount = Binary.ReadUIntFromSpan(sectionAmountSpan.ToArray(), endian);
 
-                sectionDefinitions = new BinSectionDefinition[sectionAmountSpan.Length];
+                sectionDefinitions = new BinSectionDefinition[sectionAmount];
                 sectionData = new byte[ReadUIntFromByteArray(sectionAmountSpan.ToArray(), endian)][];
 
                 for (int i = 0; i<sectionAmount; i++)

@@ -146,3 +146,7 @@ Console.WriteLine($"Result: {string.Join(",", convertedBools)}");
 if (convertedBools.Zip(boolArray, (a, b) => a == b).All(x => x))
     Console.WriteLine($"Results Match!");
 else Console.WriteLine($"Results Don't Match!");
+
+Binary.BinDataSet dataSet =  new Binary.BinDataSet();
+byte[] bytess = File.ReadAllBytes(@"X:\log.bl");
+dataSet.ReadFromByteArray(bytess, new Binary.BinVersion(1, 0, 0, 0), new Binary.BinHeader(new byte[8] { (byte)'l', (byte)'l', (byte)'l', (byte)'o', (byte)'g', 0x00, 0x00, 0x00 }), Binary.littleEndian);
