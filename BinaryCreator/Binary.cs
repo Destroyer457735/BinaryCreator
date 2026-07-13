@@ -806,9 +806,9 @@ namespace BinaryCreator
             else
                 this.header = new Header(new byte[32]);
         }
-        public Section AddSection(byte[] id, StreamMode? streamMode) 
+        public Section AddSection(byte[] id, StreamMode? streamMode = null) 
         {
-            Section section = new Section(id, 0, 0, StreamMode.File, tempPath);
+            Section section = new Section(id, 0, 0, streamMode == null ? this.streamMode : (StreamMode)streamMode, tempPath);
             sections.Add(section);
             return section;
         }
