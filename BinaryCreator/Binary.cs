@@ -806,10 +806,11 @@ namespace BinaryCreator
             else
                 this.header = new Header(new byte[32]);
         }
-        public void AddSection(byte[] id, StreamMode? streamMode) 
+        public Section AddSection(byte[] id, StreamMode? streamMode) 
         {
             Section section = new Section(id, 0, 0, StreamMode.File, tempPath);
             sections.Add(section);
+            return section;
         }
         public void RemoveSection(byte[] id, int index = 0)
         {
