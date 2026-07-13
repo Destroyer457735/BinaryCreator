@@ -12,14 +12,14 @@
     <Authors>Alec James McKeever</Authors>
     <Company>McKeever Studios</Company>
     <Product>$(AssemblyName).dll</Product>
-    <Description>Rewrote the library to include support for filestreams and more.</Description>
+    <Description>A small c# utility library for creating structured binary files. </Description>
     <Copyright>GNU General Public License</Copyright>
     <PackageIcon></PackageIcon>
     <PackageReadmeFile>ReadMe.md</PackageReadmeFile>
-    <FileVersion>1.3.3.0-alpha.2</FileVersion>
-    <AssemblyVersion>1.3.3.0-alpha.2</AssemblyVersion>
+    <FileVersion>2.0.0.0-alpha.1</FileVersion>
+    <AssemblyVersion>2.0.0.0-alpha.1</AssemblyVersion>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageReleaseNotes>Fixed ReadFromByteArray method erroring with datasets inlcuding more than 4 sections.</PackageReleaseNotes>
+    <PackageReleaseNotes>Rewrote the library to include support for filestreams and more.</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
 	  <ImplicitUsings>disable</ImplicitUsings>
 	  <NeutralLanguage>en-US</NeutralLanguage>
