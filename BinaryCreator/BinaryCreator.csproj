@@ -16,8 +16,8 @@
     <Copyright>GNU General Public License</Copyright>
     <PackageIcon></PackageIcon>
     <PackageReadmeFile>ReadMe.md</PackageReadmeFile>
-    <FileVersion>2.0.0.0-alpha.1</FileVersion>
-    <AssemblyVersion>2.0.0.0-alpha.1</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReleaseNotes>Rewrote the library to include support for filestreams and more.</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>

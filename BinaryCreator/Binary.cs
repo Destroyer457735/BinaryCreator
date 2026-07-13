@@ -924,7 +924,7 @@ namespace BinaryCreator
                     fs.Read(checksumBytes, 0, 32);
                     rva = Methods.ReadLongFromByteArray(RVA_Bytes, currentEndian);
                     size = Methods.ReadLongFromByteArray(SIZE_Bytes, currentEndian);
-                    AddSection(id);
+                    AddSection(id,streamMode);
                     GetSection(id, out section);
                     long oldPosition = fs.Position;
                     fs.Position = rva;
