@@ -26,14 +26,14 @@ for (int i = 0; i<longs.Length; i++)
     sectionData.AddRange(Binary.LongToBytes(longs[i], true));
 }
 
-short[] shorts = new short[2048];
+short[] shorts = new short[8192];
 List<byte> intData = new List<byte>();
-intData.AddRange(new byte[512]);
-for (int i = 0; i < longs.Length; i++)
+//intData.AddRange(new byte[512]);
+for (int i = 0; i < shorts.Length; i++)
 {
-    shorts[i] = (short)random.Next(short.MinValue,short.MaxValue);
+    shorts[i] = (short)i; //(short)random.Next(short.MinValue,short.MaxValue)
     intData.AddRange(Binary.ShortToBytes(shorts[i], true));
-    intData.AddRange(new byte[] { 0x00, 0x00, 0x00 });
+    //intData.AddRange(new byte[] { 0x00, 0x00, 0x00 });
 }
 
 float[] floats = new float[4096];
@@ -150,3 +150,45 @@ else Console.WriteLine($"Results Don't Match!");
 Binary.BinDataSet dataSet =  new Binary.BinDataSet();
 byte[] bytess = File.ReadAllBytes(@"X:\log.bl");
 dataSet.ReadFromByteArray(bytess, new Binary.BinVersion(1, 0, 0, 0), new Binary.BinHeader(new byte[8] { (byte)'l', (byte)'l', (byte)'l', (byte)'o', (byte)'g', 0x00, 0x00, 0x00 }), Binary.littleEndian);
+
+Console.WriteLine("================ Testing Read and Write of Section in DataSet ================");
+BinaryDataSet newDataSet = new BinaryDataSet(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TemporaryData"), StreamMode.File);
+byte[] headerMain = new byte[3] { 0xBB, 0xAD, 0x0D };
+Header dataSetHeader = new Header(headerMain.Concat(new byte[29]).ToArray());
+newDataSet.header = dataSetHeader;
+BinaryCreator.Version dataSetVersion = new BinaryCreator.Version(1, 0, 0, 0);
+
+newDataSet.customVersion = dataSetVersion;
+byte[] section = new byte[] { 0x00, 0x01, 0x02, 0x03, 0x04 };
+byte[] section2 = new byte[] { 0x0a, 0x01, 0x02, 0x03, 0x04 };
+byte[] newSectionData = new byte[] { 0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0x0a };
+newDataSet.AddSection(section, StreamMode.File);
+newDataSet.GetSection(section, out Section mainSection);
+mainSection.StreamAppend(newSectionData.ToArray());
+byte[] data = new byte[mainSection.GetLength()];
+mainSection.StreamRead(ref data, 0, data.Length);
+mainSection.StreamPosition(1);
+mainSection.StreamRemove(0, 5);
+Console.WriteLine(BitConverter.ToString(data));
+
+newDataSet.AddSection(section2, StreamMode.File);
+newDataSet.GetSection(section2, out Section mainSection2);
+//mainSection2.StreamAppend(intData.ToArray());
+using(FileStream fs = new FileStream(@"X:\alecm\Disk Images\linuxmint-22.3-cinnamon-64bit.iso", FileMode.Open, FileAccess.Read))
+{
+    mainSection2.StreamAppendFromOtherFile(fs, fs.Length, 0, 128000);
+}
+mainSection2.StreamPosition(0);
+mainSection2.StreamRemove(0, 5000, 128000);
+newDataSet.RefreshRVAs();
+Console.WriteLine(mainSection2.RVA);
+newDataSet.BuildToDisk(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data.bld"));
+newDataSet.CleanUp();
+BinaryDataSet readDataSet = new BinaryDataSet(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TemporaryData"), StreamMode.File);
+readDataSet.header = dataSetHeader;
+readDataSet.ReadFromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data.bld"), dataSetHeader, dataSetVersion);
+readDataSet.BuildToDisk(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "NewData.bld"));
+readDataSet.CleanUp();
+
+
+

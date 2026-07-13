@@ -7,17 +7,17 @@
     <AssemblyName>bincrtr</AssemblyName>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <PackageId>$(AssemblyName).dll</PackageId>
-    <Version>1.3.3</Version>
+    <Version>2.0.0-alpha.1</Version>
     <Title>Binary Creator</Title>
     <Authors>Alec James McKeever</Authors>
     <Company>McKeever Studios</Company>
     <Product>$(AssemblyName).dll</Product>
-    <Description>A small c# utility library for creating structured binary files. </Description>
+    <Description>Rewrote the library to include support for filestreams and more.</Description>
     <Copyright>GNU General Public License</Copyright>
     <PackageIcon></PackageIcon>
     <PackageReadmeFile>ReadMe.md</PackageReadmeFile>
-    <FileVersion>1.3.2.0</FileVersion>
-    <AssemblyVersion>1.3.2.0</AssemblyVersion>
+    <FileVersion>1.3.3.0-alpha.2</FileVersion>
+    <AssemblyVersion>1.3.3.0-alpha.2</AssemblyVersion>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReleaseNotes>Fixed ReadFromByteArray method erroring with datasets inlcuding more than 4 sections.</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
