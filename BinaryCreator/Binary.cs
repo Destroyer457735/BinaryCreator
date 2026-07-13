@@ -795,7 +795,7 @@ namespace BinaryCreator
         public Endian endian = Endian.Little;
         public BinaryDataSet(string tempPath, StreamMode streamMode, Version? customVersion = null, Header? header = null)
         {
-            this.streamMode = StreamMode.File;
+            this.streamMode = streamMode;
             this.tempPath = tempPath;
             if (customVersion != null)
                 this.customVersion = customVersion;
