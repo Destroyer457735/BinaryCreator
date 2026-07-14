@@ -933,7 +933,7 @@ namespace BinaryCreator
                     fs = File.OpenRead(path);
                     if (!force)
                     {
-                        checksumBytesCompute = sha256.ComputeHash();
+                        checksumBytesCompute = sha256.ComputeHash(section.GetAsStream());
                         if (!checksumBytes.SequenceEqual(checksumBytesCompute))
                         {
                             CleanUp();
@@ -1021,6 +1021,15 @@ namespace BinaryCreator
                 memoryStream = new MemoryStream();
                 fileStream = null;
             }
+        }
+        public Stream GetAsStream()
+        {
+            if (fileStream != null)
+                return fileStream;
+            else if (memoryStream != null)
+                return memoryStream;
+            else
+                throw new UninstantiatedSectionStreamException();
         }
         public long GetLength()
         {
