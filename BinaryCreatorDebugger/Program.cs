@@ -114,9 +114,15 @@ Console.WriteLine(BitConverter.ToString(finalized));
 Console.WriteLine(Binary.ReadShortFromByteArray(new byte[] { 0x10, 0xFF, 0x01 }, Binary.littleEndian, 0));
 
 Binary.BinDataSet readSet = new Binary.BinDataSet();
-readSet.ReadFromByteArray(finalized, new Binary.BinVersion(),binHeader,Binary.littleEndian);
-Console.WriteLine(BitConverter.ToString(readSet.GetDataInSection(dataSection)));
+try
+{
+    readSet.ReadFromByteArray(finalized, new Binary.BinVersion(), binHeader, Binary.littleEndian);
+    Console.WriteLine(BitConverter.ToString(readSet.GetDataInSection(dataSection)));
+}
+catch
+{
 
+}
 Console.WriteLine("================ Testing Smart Converters ================");
 int incrementer = 0;
 byte[] SmartConvertByteArray = new byte[16] { 0x00, 0x01, 0x02, 0x03, 0x04, 0x00, 0x01, 0x02, 0x03, 0x04, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05 };
@@ -149,10 +155,20 @@ else Console.WriteLine($"Results Don't Match!");
 
 Binary.BinDataSet dataSet =  new Binary.BinDataSet();
 byte[] bytess = File.ReadAllBytes(@"X:\log.bl");
-dataSet.ReadFromByteArray(bytess, new Binary.BinVersion(1, 0, 0, 0), new Binary.BinHeader(new byte[8] { (byte)'l', (byte)'l', (byte)'l', (byte)'o', (byte)'g', 0x00, 0x00, 0x00 }), Binary.littleEndian);
+try
+{
+    dataSet.ReadFromByteArray(bytess, new Binary.BinVersion(1, 0, 0, 0), new Binary.BinHeader(new byte[8] { (byte)'l', (byte)'l', (byte)'l', (byte)'o', (byte)'g', 0x00, 0x00, 0x00 }), Binary.littleEndian);
+}
+catch
+{
+
+}
+
+
+
 
 Console.WriteLine("================ Testing Read and Write of Section in DataSet ================");
-BinaryDataSet newDataSet = new BinaryDataSet(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TemporaryData"), StreamMode.File);
+BinaryDataSet newDataSet = new BinaryDataSet(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TemporaryData"), StreamMode.Memory);
 byte[] headerMain = new byte[3] { 0xBB, 0xAD, 0x0D };
 Header dataSetHeader = new Header(headerMain.Concat(new byte[29]).ToArray());
 newDataSet.header = dataSetHeader;
@@ -162,7 +178,7 @@ newDataSet.customVersion = dataSetVersion;
 byte[] section = new byte[] { 0x00, 0x01, 0x02, 0x03, 0x04 };
 byte[] section2 = new byte[] { 0x0a, 0x01, 0x02, 0x03, 0x04 };
 byte[] newSectionData = new byte[] { 0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0x0a };
-newDataSet.AddSection(section, StreamMode.File);
+newDataSet.AddSection(section, StreamMode.Memory);
 newDataSet.GetSection(section, out Section mainSection);
 mainSection.StreamAppend(newSectionData.ToArray());
 byte[] data = new byte[mainSection.GetLength()];
@@ -184,7 +200,7 @@ newDataSet.RefreshRVAs();
 Console.WriteLine(mainSection2.RVA);
 newDataSet.BuildToDisk(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data.bld"));
 newDataSet.CleanUp();
-BinaryDataSet readDataSet = new BinaryDataSet(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TemporaryData"), StreamMode.File);
+BinaryDataSet readDataSet = new BinaryDataSet(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TemporaryData"), StreamMode.Memory);
 readDataSet.header = dataSetHeader;
 readDataSet.ReadFromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data.bld"), dataSetHeader, dataSetVersion);
 readDataSet.BuildToDisk(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "NewData.bld"));

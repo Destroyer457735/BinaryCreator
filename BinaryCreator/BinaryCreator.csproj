@@ -7,7 +7,7 @@
     <AssemblyName>bincrtr</AssemblyName>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <PackageId>$(AssemblyName).dll</PackageId>
-    <Version>2.0.2</Version>
+    <Version>2.0.3</Version>
     <Title>Binary Creator</Title>
     <Authors>Alec James McKeever</Authors>
     <Company>McKeever Studios</Company>

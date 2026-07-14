@@ -1216,9 +1216,17 @@ namespace BinaryCreator
                     appendStream.Close();
                 }
             }
-            else
+            else if (memoryStream != null)
             {
-                throw new MemoryStreamUnsuportedException("This method doesn't include support for memory streams.");
+                string filePath = file.Name;
+                long oldFilePosition = file.Position;
+
+                file.Close();
+                file = new FileStream(filePath, FileMode.Open);
+
+                byte[] data = memoryStream.ToArray();
+                file.Write(data);
+                file.Close();
             }
         }
         private string GetNewTempFile()
