@@ -7,7 +7,7 @@
     <AssemblyName>bincrtr</AssemblyName>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <PackageId>$(AssemblyName).dll</PackageId>
-    <Version>2.0.4-alpha.1</Version>
+    <Version>2.0.4-alpha.2</Version>
     <Title>Binary Creator</Title>
     <Authors>Alec James McKeever</Authors>
     <Company>McKeever Studios</Company>
@@ -19,7 +19,7 @@
     <FileVersion>1.0.0.0</FileVersion>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageReleaseNotes>Fixed stream mode for data set being set to FileStream (???)</PackageReleaseNotes>
+    <PackageReleaseNotes>Fixed StreamAppend method (I have no idea what I was doing there)</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
 	  <ImplicitUsings>disable</ImplicitUsings>
 	  <NeutralLanguage>en-US</NeutralLanguage>

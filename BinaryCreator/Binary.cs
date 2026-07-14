@@ -933,7 +933,7 @@ namespace BinaryCreator
                     fs = File.OpenRead(path);
                     if (!force)
                     {
-                        checksumBytesCompute = sha256.ComputeHash(section.fileStream);
+                        checksumBytesCompute = sha256.ComputeHash();
                         if (!checksumBytes.SequenceEqual(checksumBytesCompute))
                         {
                             CleanUp();
@@ -1109,8 +1109,7 @@ namespace BinaryCreator
             } else if (memoryStream != null)
             {
                 byte[] memoryStreamBuffer = memoryStream.ToArray();
-                byte[] newBuffer = new byte[memoryStreamBuffer.Length + buffer.Length];
-                Array.Copy(memoryStreamBuffer, 0, newBuffer, 0, memoryStreamBuffer.Length);
+                byte[] newBuffer = memoryStreamBuffer.Concat(buffer).ToArray();
                 memoryStream.Close(); memoryStream.Dispose();
                 memoryStream = new MemoryStream(newBuffer);
             }
@@ -1222,7 +1221,7 @@ namespace BinaryCreator
                 long oldFilePosition = file.Position;
 
                 file.Close();
-                file = new FileStream(filePath, FileMode.Open);
+                file = new FileStream(filePath, FileMode.Append);
 
                 byte[] data = memoryStream.ToArray();
                 file.Write(data);
