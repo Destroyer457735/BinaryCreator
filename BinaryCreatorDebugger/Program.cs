@@ -178,7 +178,7 @@ newDataSet.customVersion = dataSetVersion;
 byte[] section = new byte[] { 0x00, 0x01, 0x02, 0x03, 0x04 };
 byte[] section2 = new byte[] { 0x0a, 0x01, 0x02, 0x03, 0x04 };
 byte[] newSectionData = new byte[] { 0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0x0a };
-newDataSet.AddSection(section, StreamMode.Memory);
+newDataSet.AddSection(section);
 newDataSet.GetSection(section, out Section mainSection);
 mainSection.StreamAppend(newSectionData.ToArray());
 byte[] data = new byte[mainSection.GetLength()];

@@ -1108,7 +1108,7 @@ namespace BinaryCreator
                 fileStream.Position = oldPosition;
             } else if (memoryStream != null)
             {
-                byte[] memoryStreamBuffer = memoryStream.GetBuffer();
+                byte[] memoryStreamBuffer = memoryStream.ToArray();
                 byte[] newBuffer = new byte[memoryStreamBuffer.Length + buffer.Length];
                 Array.Copy(memoryStreamBuffer, 0, newBuffer, 0, memoryStreamBuffer.Length);
                 memoryStream.Close(); memoryStream.Dispose();
@@ -1162,7 +1162,7 @@ namespace BinaryCreator
                 if (length + memoryStream.Length > int.MaxValue)
                     throw new OverflowException("Cannot complete the operation as it will result in an overflow");
                 byte[] addBytes = new byte[length];
-                byte[] originalBytes = memoryStream.GetBuffer();
+                byte[] originalBytes = memoryStream.ToArray();
                 file.Read(addBytes, offset, addBytes.Length);
                 memoryStream = new MemoryStream(originalBytes.Concat(addBytes).ToArray());
             }
