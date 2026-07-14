@@ -1117,8 +1117,7 @@ namespace BinaryCreator
                 fileStream.Position = oldPosition;
             } else if (memoryStream != null)
             {
-                byte[] memoryStreamBuffer = memoryStream.ToArray();
-                byte[] newBuffer = memoryStreamBuffer.Concat(buffer).ToArray();
+                byte[] newBuffer = memoryStream.ToArray().Concat(buffer).ToArray();
                 memoryStream.Close(); memoryStream.Dispose();
                 memoryStream = new MemoryStream(newBuffer);
             }
