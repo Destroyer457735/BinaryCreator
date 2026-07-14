@@ -7,7 +7,7 @@
     <AssemblyName>bincrtr</AssemblyName>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <PackageId>$(AssemblyName).dll</PackageId>
-    <Version>2.0.4-alpha.5</Version>
+    <Version>2.0.4-alpha.6</Version>
     <Title>Binary Creator</Title>
     <Authors>Alec James McKeever</Authors>
     <Company>McKeever Studios</Company>
@@ -19,7 +19,7 @@
     <FileVersion>1.0.0.0</FileVersion>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageReleaseNotes>Nuget package still isn't including changes.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added value readers for streams.</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
 	  <ImplicitUsings>disable</ImplicitUsings>
 	  <NeutralLanguage>en-US</NeutralLanguage>

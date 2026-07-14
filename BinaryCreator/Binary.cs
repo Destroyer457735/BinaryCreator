@@ -1460,9 +1460,6 @@ namespace BinaryCreator
             }
             return span.ToArray();
         }
-
-
-
         public static byte[] SmartConvertByteArrayToBytes(byte[] data, Endian endianness)
         {
             byte[] startIndex = ConvertValueToBytes(data.Length, endianness);
@@ -1473,7 +1470,6 @@ namespace BinaryCreator
             byte[] startIndex = ConvertValueToBytes(data.Length, endianness);
             return startIndex.Concat(data.ToArray()).ToArray();
         }
-
         public static byte[] SmartConvertBytesToByteArray(byte[] data, Endian endianness, int index = 0)
         {
             int arrayLength = ReadIntFromByteArray(data, endianness, index);
@@ -1496,8 +1492,6 @@ namespace BinaryCreator
             Span<byte> finalized = new Span<byte>(data, index + 4, arrayLength);
             return finalized.ToArray();
         }
-
-
         public static byte CreateByte(bool[] bits)
         {
             if (bits.Length > 8)
@@ -1618,8 +1612,6 @@ namespace BinaryCreator
         }
         #endregion
         #region Readers
-
-
         public static ushort ReadUshortFromByteArray(byte[] bytes, Endian endianess, int startIndex = 0)
         {
             Span<byte> copied = bytes.AsSpan(startIndex, 2);
@@ -1632,9 +1624,13 @@ namespace BinaryCreator
             if (endianess == Endian.Big) { copied.Reverse(); }
             return BitConverter.ToUInt16(copied);
         }
-
-
-
+        public static ushort ReadUShortFromStream(Stream stream, Endian endianess, int offset = 0)
+        {
+            byte[] bytes = new byte[2];
+            stream.Read(bytes, offset, bytes.Length);
+            if (endianess == Endian.Big) { bytes.Reverse(); }
+            return BitConverter.ToUInt16(bytes);
+        }
         public static short ReadShortFromByteArray(byte[] bytes, Endian endianess, int startIndex = 0)
         {
             Span<byte> copied = bytes.AsSpan(startIndex, 2);
@@ -1648,8 +1644,13 @@ namespace BinaryCreator
             if (endianess == Endian.Big) { copied.Reverse(); }
             return BitConverter.ToInt16(copied);
         }
-
-
+        public static short ReadShortFromStream(Stream stream, Endian endianess, int offset = 0)
+        {
+            byte[] bytes = new byte[2];
+            stream.Read(bytes, offset, bytes.Length);
+            if (endianess == Endian.Big) { bytes.Reverse(); }
+            return BitConverter.ToInt16(bytes);
+        }
         public static uint ReadUIntFromByteArray(byte[] bytes, Endian endianess, int startIndex = 0)
         {
             Span<byte> copied = bytes.AsSpan(startIndex, 4);
@@ -1663,8 +1664,13 @@ namespace BinaryCreator
             if (endianess == Endian.Big) { copied.Reverse(); }
             return BitConverter.ToUInt32(copied);
         }
-
-
+        public static uint ReadUIntFromStream(Stream stream, Endian endianess, int offset = 0)
+        {
+            byte[] bytes = new byte[4];
+            stream.Read(bytes, offset, bytes.Length);
+            if (endianess == Endian.Big) { bytes.Reverse(); }
+            return BitConverter.ToUInt32(bytes);
+        }
         public static int ReadIntFromByteArray(byte[] bytes, Endian endianess, int startIndex = 0)
         {
             Span<byte> copied = bytes.AsSpan(startIndex, 4);
@@ -1678,8 +1684,13 @@ namespace BinaryCreator
             if (endianess == Endian.Big) { copied.Reverse(); }
             return BitConverter.ToInt32(copied);
         }
-
-
+        public static int ReadIntFromStream(Stream stream, Endian endianess, int offset = 0)
+        {
+            byte[] bytes = new byte[4];
+            stream.Read(bytes, offset, bytes.Length);
+            if (endianess == Endian.Big) { bytes.Reverse(); }
+            return BitConverter.ToInt32(bytes);
+        }
         public static ulong ReadUlongFromByteArray(byte[] bytes, Endian endianess, int startIndex = 0)
         {
             Span<byte> copied = bytes.AsSpan(startIndex, 8);
@@ -1693,8 +1704,13 @@ namespace BinaryCreator
             if (endianess == Endian.Big) { copied.Reverse(); }
             return BitConverter.ToUInt64(copied);
         }
-
-
+        public static ulong ReadULongFromStream(Stream stream, Endian endianess, int offset = 0)
+        {
+            byte[] bytes = new byte[8];
+            stream.Read(bytes, offset, bytes.Length);
+            if (endianess == Endian.Big) { bytes.Reverse(); }
+            return BitConverter.ToUInt64(bytes);
+        }
         public static long ReadLongFromByteArray(byte[] bytes, Endian endianess, int startIndex = 0)
         {
             Span<byte> copied = bytes.AsSpan(startIndex, 8);
@@ -1708,8 +1724,13 @@ namespace BinaryCreator
             if (endianess == Endian.Big) { copied.Reverse(); }
             return BitConverter.ToInt64(copied);
         }
-
-
+        public static long ReadLongFromStream(Stream stream, Endian endianess, int offset = 0)
+        {
+            byte[] bytes = new byte[8];
+            stream.Read(bytes, offset, bytes.Length);
+            if (endianess == Endian.Big) { bytes.Reverse(); }
+            return BitConverter.ToInt64(bytes);
+        }
         public static float ReadSingleFromByteArray(byte[] bytes, Endian endianess, int startIndex = 0)
         {
             Span<byte> copied = bytes.AsSpan(startIndex, 4);
@@ -1723,8 +1744,13 @@ namespace BinaryCreator
             if (endianess == Endian.Big) { copied.Reverse(); }
             return BitConverter.ToSingle(copied);
         }
-
-
+        public static float ReadSingleFromStream(Stream stream, Endian endianess, int offset = 0)
+        {
+            byte[] bytes = new byte[4];
+            stream.Read(bytes, offset, bytes.Length);
+            if (endianess == Endian.Big) { bytes.Reverse(); }
+            return BitConverter.ToSingle(bytes);
+        }
         public static double ReadDoubleFromByteArray(byte[] bytes, Endian endianess, int startIndex = 0)
         {
             Span<byte> copied = bytes.AsSpan(startIndex, 8);
@@ -1738,9 +1764,13 @@ namespace BinaryCreator
             if (endianess == Endian.Big) { copied.Reverse(); }
             return BitConverter.ToDouble(copied);
         }
-
-
-
+        public static double ReadDoubleFromStream(Stream stream, Endian endianess, int offset = 0)
+        {
+            byte[] bytes = new byte[8];
+            stream.Read(bytes, offset, bytes.Length);
+            if (endianess == Endian.Big) { bytes.Reverse(); }
+            return BitConverter.ToDouble(bytes);
+        }
         #endregion
         #region SpanReaders
         public static ushort ReadUshortFromSpan(Span<byte> bytes, Endian endianess)
