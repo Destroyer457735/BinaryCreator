@@ -919,7 +919,7 @@ namespace BinaryCreator
 
                 for (int i = 0; i < sectionCount; i++)
                 {
-                    id = Methods.SmartConvertBytesToByteArray(fs, currentEndian);
+                    id = Methods.SmartReadBytesFromStream(fs, currentEndian);
                     fs.Read(RVA_Bytes, 0, 8);
                     fs.Read(SIZE_Bytes, 0, 8);
                     fs.Read(checksumBytes, 0, 32);
@@ -1478,7 +1478,7 @@ namespace BinaryCreator
             Span<byte> finalized = new Span<byte>(data, index + 4, arrayLength);
             return finalized.ToArray();
         }
-        public static byte[] SmartConvertBytesToByteArray(FileStream fs, Endian endianness, int index = 0)
+        public static byte[] SmartReadBytesFromStream(Stream fs, Endian endianness, int index = 0)
         {
             byte[] arrayLengthBytes = new byte[4];
             fs.Read(arrayLengthBytes, index, arrayLengthBytes.Length);
